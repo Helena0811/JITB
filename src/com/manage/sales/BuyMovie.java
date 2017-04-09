@@ -12,6 +12,8 @@ public class BuyMovie {
 	private int sales_time;
 	private String date;
 	private int sales_tot;
+	private String poster;
+	private String start_date;
 	
 	public int getBuy_movie_id() {
 		return buy_movie_id;
@@ -48,6 +50,18 @@ public class BuyMovie {
 	}
 	public void setSales_tot(int sales_tot) {
 		this.sales_tot = sales_tot;
+	}
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+	public String getStart_date() {
+		return start_date;
+	}
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
 	}
 	
 	

@@ -3,17 +3,21 @@
  */
 package com.manage.sales;
 
+import java.awt.Choice;
 import java.awt.Color;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class SalesTheater extends JPanel{
 	
-	JPanel p_center;
+	JPanel p_north, p_center;
+	Choice choice;
 	
 	public SalesTheater() {
+		
+		p_north = new JPanel();
 		p_center = new JPanel();
+		
 		p_center.setBackground(Color.yellow);
 		add(p_center);
 		
