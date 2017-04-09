@@ -9,7 +9,7 @@ import com.user.frame.ScreenFrame;
 import com.user.main.Main;
 
 public class MenuChoiceScreen extends ScreenFrame implements ActionListener{
-	JButton next;
+	private JButton next;
 	
 	public MenuChoiceScreen(Main main) {
 		super(main);
