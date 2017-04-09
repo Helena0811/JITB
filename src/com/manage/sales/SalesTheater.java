@@ -8,7 +8,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class SalesTheater extends JFrame{
+public class SalesTheater extends JPanel{
 	
 	JPanel p_center;
 	

@@ -24,23 +24,21 @@ public class SalesMovie extends JPanel{
 	private JPanel panel1, panel2, p_north, p_center;
 	private JTabbedPane tab;
 	private Choice choice;
+	private SalesTheater salesTheater;
 
 	public SalesMovie() {
 
 		panel1 = new JPanel();
-		panel2 = new JPanel();
+		salesTheater = new SalesTheater();
 		p_north = new JPanel();
 		p_center = new JPanel();
 		choice = new Choice();
 
 		tab = new JTabbedPane();
 		
-		tab.addTab("영화별", panel1);
-		tab.setMnemonicAt(0, KeyEvent.VK_1);
+		tab.addTab("영화별", panel1);		
+		tab.addTab("영화관별", salesTheater);
 		
-		tab.addTab("영화관별", panel2);
-		tab.setMnemonicAt(0, KeyEvent.VK_1);
-
 		choice.add("상영 중");
 		choice.add("과거 상영");
 		choice.setPreferredSize(new Dimension(130, 30));
