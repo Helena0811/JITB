@@ -16,29 +16,29 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-public class SalesMovie extends JFrame{
+public class SalesMovie extends JPanel{
 
-	// p_content : 콘텐츠+choice를 다 담는 전체 패널
-	// p_north : choice를 넣을 패널
-	// p_center : 내용물이 들어갈 패널
-	private JPanel p_content, p_north, p_center;
+	// panel1 : 영화 별 매출 panel (p_north, p_center, choice포함)
+	// panel2 : 영화관 총 매출 panel
+
+	private JPanel panel1, panel2, p_north, p_center;
 	private JTabbedPane tab;
 	private Choice choice;
-	private GridPanel p_grid;
 
 	public SalesMovie() {
 
-		p_content = new JPanel();
+		panel1 = new JPanel();
+		panel2 = new JPanel();
 		p_north = new JPanel();
 		p_center = new JPanel();
 		choice = new Choice();
 
 		tab = new JTabbedPane();
 		
-		tab.addTab("영화별", p_content);
+		tab.addTab("영화별", panel1);
 		tab.setMnemonicAt(0, KeyEvent.VK_1);
 		
-		tab.addTab("영화관별", p_grid);
+		tab.addTab("영화관별", panel2);
 		tab.setMnemonicAt(0, KeyEvent.VK_1);
 
 		choice.add("상영 중");
@@ -51,9 +51,9 @@ public class SalesMovie extends JFrame{
 
 		p_center.setBackground(Color.gray);
 
-		p_content.add(p_north, BorderLayout.NORTH);
-		p_content.add(p_center, BorderLayout.CENTER);
-		p_content.setPreferredSize(new Dimension(1000, 600));
+		panel1.add(p_north, BorderLayout.NORTH);
+		panel1.add(p_center);
+		panel1.setPreferredSize(new Dimension(1000, 700));
 		add(tab);
 		
 		setLayout(new FlowLayout());

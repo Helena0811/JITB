@@ -2,7 +2,6 @@ package com.manage.main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.manage.movie.Movie;
+import com.manage.sales.SalesMovie;
 
 public class Main extends JFrame implements ActionListener{
 	JPanel p_north, p_content;
@@ -25,6 +25,7 @@ public class Main extends JFrame implements ActionListener{
 	
 	// 각 메뉴 패널(여기에 각자 만든 패널을 가져와주시면 됩니다!)
 	Movie movie;
+	SalesMovie salesMovie;
 	
 	// 메뉴에 따른 여러 페이지 배열로 저장
 	JPanel[] page=new JPanel[5];
@@ -67,12 +68,15 @@ public class Main extends JFrame implements ActionListener{
 		 * 4 : 매출 관리
 		 * */
 		page[1]=new Movie();
+		page[4]=new SalesMovie();
 		
 		// Movie Panel 부착
 		p_content.add(page[1]);
+		p_content.add(page[4]);
 		
 		// JTabbedPane을 사용하기 위해 GridLayout 1행1열 사용
-		p_content.setLayout(new GridLayout(1,1));
+		// Grid 사용하니까 화면이 2개다 보여서 Grid 지웠습니다.
+		//p_content.setLayout(new GridLayout(1,1));
 		
 		// 그냥 패널 붙이는 실험할 때 편하시라고 배경색 올려놨어용
 		p_content.setBackground(Color.pink);
@@ -84,6 +88,9 @@ public class Main extends JFrame implements ActionListener{
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
+		//초기화면 세팅
+		page[1].setVisible(false);
+		page[4].setVisible(false);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -103,19 +110,22 @@ public class Main extends JFrame implements ActionListener{
 		}
 		*/
 		if(bt==menu[1]){
-			System.out.println("누름");
+			System.out.println("Movie 누름");
 			page[1].setVisible(true);
+			page[4].setVisible(false);
+		} else if(bt==menu[4]) {
+			System.out.println("Seles 누름");			
+			page[4].setVisible(true);
+			page[1].setVisible(false);
 		}
 		else{
 			page[1].setVisible(false);
+			page[4].setVisible(false);
 		}
 	}
 
 	public static void main(String[] args) {
-		new Main();
-		
-		
-
+		new Main();	
 	}
 
 }
