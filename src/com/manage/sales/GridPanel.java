@@ -72,12 +72,6 @@ public class GridPanel extends JPanel{
 			while(rs.next()){
 				BuyMovie dto = new BuyMovie();
 
-				//dto.setBuy_movie_id(rs.getInt("buy_movie_id"));
-				//dto.setMovie_id(rs.getInt("movie_id"));
-				//dto.setSales_qt(rs.getInt("sqles_qt"));
-				//dto.setSales_time(rs.getInt("sales_time"));
-				//dto.setDate(rs.getString("date"));
-				
 				dto.setPoster(rs.getString("poster"));
 				dto.setSales_tot(rs.getInt("sales_tot"));
 				dto.setSales_qt(rs.getInt("sales_qt"));

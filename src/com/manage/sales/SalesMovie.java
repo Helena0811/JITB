@@ -46,7 +46,7 @@ public class SalesMovie extends JPanel implements ItemListener{
 		tab.addTab("영화별", panel1);		
 		tab.addTab("영화관별", salesTheater);
 		
-		choice.add("선택 ▼");
+		//choice.add("선택 ▼");
 		choice.add("상영 중");
 		choice.add("과거 상영");
 		choice.setPreferredSize(new Dimension(130, 30));
@@ -80,11 +80,9 @@ public class SalesMovie extends JPanel implements ItemListener{
 		int index = choice.getSelectedIndex();
 		System.out.println(index);
 		
-		if(index==1){			
+		if(index==0){			
 			p_grid.setVisible(true);			
-		} else if(index==2) {
-			p_grid.setVisible(false);
-		} else {
+		} else if(index==1) {
 			p_grid.setVisible(false);
 		}
 	}
