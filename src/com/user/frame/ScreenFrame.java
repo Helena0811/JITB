@@ -25,7 +25,7 @@ public class ScreenFrame extends JPanel{
 		add(label);
 		
 		setVisible(false);
-		setBackground(Color.BLACK);
+		setBackground(new Color(33,33,33));
 		setPreferredSize(new Dimension(800, 1200));
 	}
 }
