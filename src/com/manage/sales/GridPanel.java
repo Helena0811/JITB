@@ -24,7 +24,9 @@ public class GridPanel extends JPanel{
 	String path = "C:/project/JITB/res/";
 	ArrayList <BuyMovie> list = new ArrayList<BuyMovie>();
 	
+	//
 	Calendar strDate = Calendar.getInstance();
+	Calendar today = Calendar.getInstance();
 	Calendar endDate = Calendar.getInstance();
 	
 	public GridPanel() {
@@ -44,6 +46,7 @@ public class GridPanel extends JPanel{
 		//join을 통해 원하는 정보 불러오기
 		String sql = "select a.POSTER"
 				+ ", a.START_DATE"
+				+ ", a.END_DATE"
 				+", sum(d.sales_qt) as sales_qt"
 				+", sum(d.sales_tot) as sales_tot"
 				+" from movie a"
@@ -56,7 +59,8 @@ public class GridPanel extends JPanel{
 				+" and c.SEAT_ID = d.SEAT_ID"
 				+" group by"
 				+" a.POSTER"
-				+", a.START_DATE";
+				+", a.START_DATE"
+				+", a.END_DATE";
 				
 		PreparedStatement pstmt= null;
 		ResultSet rs = null;
@@ -78,6 +82,7 @@ public class GridPanel extends JPanel{
 				dto.setSales_tot(rs.getInt("sales_tot"));
 				dto.setSales_qt(rs.getInt("sales_qt"));
 				dto.setStart_date(rs.getString("start_date"));
+				dto.setEnd_date(rs.getString("end_date"));
 
 				list.add(dto);
 			}
@@ -120,11 +125,12 @@ public class GridPanel extends JPanel{
 				int period = 0; //영화 여러번 돌리기 때문에 startDate가 달라 초기화 시키기
 				
 				//endDate에 현재 일자 넣기
-				endDate.setTime(new Date());
+				today.setTime(new Date());
 				//strDate 영화 개봉일 넣어줌
 				strDate.set(year, month, date);
 				//현재 일자에서 영화개봉일을 뺀 상영기간을 구해줌
-				period = (int)(endDate.getTimeInMillis() - strDate.getTimeInMillis())/(60*60*24*1000);
+				endDate.set(year, month, date);
+				period = (int)(today.getTimeInMillis() - strDate.getTimeInMillis())/(60*60*24*1000);
 				
 				String sales = String.format("%.1f", (double)sales_tot/period);
 				String booking = String.format("%.1f", (double)sales_qt/period*100);

@@ -14,7 +14,8 @@ public class BuyMovie {
 	private int sales_tot;
 	private String poster;
 	private String start_date;
-	
+	private String end_date;
+
 	public int getBuy_movie_id() {
 		return buy_movie_id;
 	}
@@ -62,6 +63,13 @@ public class BuyMovie {
 	}
 	public void setStart_date(String start_date) {
 		this.start_date = start_date;
+	}
+	
+	public String getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
 	}
 	
 	

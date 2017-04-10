@@ -9,16 +9,18 @@ import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.ItemSelectable;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Connection;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import com.jitb.db.DBManager;
 
 
-public class SalesMovie extends JPanel{
+public class SalesMovie extends JPanel implements ItemListener{
 	 
 	DBManager manager = DBManager.getInstance();
 	Connection con;
@@ -29,7 +31,6 @@ public class SalesMovie extends JPanel{
 	private JTabbedPane tab;
 	private Choice choice;
 	private SalesTheater salesTheater;
-	
 
 	public SalesMovie() {
 
@@ -45,6 +46,7 @@ public class SalesMovie extends JPanel{
 		tab.addTab("영화별", panel1);		
 		tab.addTab("영화관별", salesTheater);
 		
+		choice.add("선택 ▼");
 		choice.add("상영 중");
 		choice.add("과거 상영");
 		choice.setPreferredSize(new Dimension(130, 30));
@@ -53,17 +55,16 @@ public class SalesMovie extends JPanel{
 		p_north.add(choice);
 		p_north.setPreferredSize(new Dimension(1000, 50));
 
-		//p_center.setBackground(Color.pink);
-		//p_center.add(p_grid);
+		p_center.add(p_grid);
 		p_grid.setPreferredSize(new Dimension(1000, 650));
 
 		panel1.add(p_north, BorderLayout.NORTH);
-		panel1.add(p_grid, BorderLayout.CENTER);
-		panel1.setPreferredSize(new Dimension(1000, 700));
-		
+		panel1.add(p_center, BorderLayout.CENTER);
+		panel1.setPreferredSize(new Dimension(1000, 700));		
 		add(tab);
 
 		init();
+		choice.addItemListener(this);
 		
 		setLayout(new FlowLayout());
 		setSize(1000, 650);
@@ -75,7 +76,21 @@ public class SalesMovie extends JPanel{
 		((GridPanel)p_grid).setConnection(con);
 	}
 
+	public void itemStateChanged(ItemEvent e) {
+		int index = choice.getSelectedIndex();
+		System.out.println(index);
+		
+		if(index==1){			
+			p_grid.setVisible(true);			
+		} else if(index==2) {
+			p_grid.setVisible(false);
+		} else {
+			p_grid.setVisible(false);
+		}
+	}
+
 	public static void main(String[] args) {
 		new SalesMovie();
 	}
+
 }
