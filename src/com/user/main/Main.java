@@ -1,5 +1,6 @@
 package com.user.main;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -74,7 +75,6 @@ public class Main extends JFrame{
 				System.exit(0);
 			}
 		});
-		
 		setSize(800, 1200);
 		setLocationRelativeTo(null);
 		setVisible(true);

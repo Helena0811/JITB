@@ -50,13 +50,16 @@ public class InitScreen extends ScreenFrame implements ActionListener {
 
 		// panel.add(bt_poster,BorderLayout.CENTER);
 		panel.add(bt, BorderLayout.CENTER);
+		
 		add(bt);
 		add(can);
-
-		URL url = getClass().getResource("/pt.jpg");
+		
+		URL url = getClass().getResource("/touch.png");
+		URL url2 = getClass().getResource("/pt.png");
 
 		try {
 			img = ImageIO.read(url);
+			img = ImageIO.read(url2);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,7 +68,7 @@ public class InitScreen extends ScreenFrame implements ActionListener {
 		      
 			@Override
 		      public void paint(Graphics g) {
-		         g.drawImage(img, 0, 0, 50, 100, this);
+		         g.drawImage(img, 0, 0, 50, 50, this);
 			
 		      }
 		   };
