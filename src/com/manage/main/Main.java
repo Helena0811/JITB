@@ -84,7 +84,7 @@ public class Main extends JFrame implements ActionListener{
 		add(p_north,BorderLayout.NORTH);
 		add(p_content);
 		
-		setSize(1000,800);
+		setSize(1200,800);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
@@ -114,7 +114,7 @@ public class Main extends JFrame implements ActionListener{
 			page[1].setVisible(true);
 			page[4].setVisible(false);
 		} else if(bt==menu[4]) {
-			System.out.println("Seles 누름");			
+			System.out.println("Sales 누름");			
 			page[4].setVisible(true);
 			page[1].setVisible(false);
 		}
