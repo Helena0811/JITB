@@ -25,7 +25,6 @@ public class SalesMovie extends JPanel{
 
 	// panel1 : 영화 별 매출 panel (p_north, p_center, choice포함)
 	// panel2 : 영화관 총 매출 panel
-
 	private JPanel panel1, p_north, p_center, p_grid;
 	private JTabbedPane tab;
 	private Choice choice;
@@ -54,16 +53,16 @@ public class SalesMovie extends JPanel{
 		p_north.add(choice);
 		p_north.setPreferredSize(new Dimension(1000, 50));
 
-		p_center.setBackground(Color.gray);
-		
+		//p_center.setBackground(Color.pink);
+		//p_center.add(p_grid);
+		p_grid.setPreferredSize(new Dimension(1000, 650));
 
 		panel1.add(p_north, BorderLayout.NORTH);
-		panel1.add(p_center);
+		panel1.add(p_grid, BorderLayout.CENTER);
 		panel1.setPreferredSize(new Dimension(1000, 700));
 		
 		add(tab);
-		panel1.add(p_grid);
-		
+
 		init();
 		
 		setLayout(new FlowLayout());

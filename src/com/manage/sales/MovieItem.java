@@ -23,9 +23,10 @@ public class MovieItem extends JPanel{
 			}
 		};
 		
-		la_sales = new JLabel(sales);
-		la_booking = new JLabel(booking);
-		
+		//판매율/방문자수??
+		la_sales = new JLabel("평균 매출 : "+ sales+"\n");
+		la_booking = new JLabel("평균 예매 : " +booking);
+	
 		add(can);
 		add(la_sales);
 		add(la_booking);
@@ -33,7 +34,6 @@ public class MovieItem extends JPanel{
 		can.setPreferredSize(new Dimension(120, 120));
 		setPreferredSize(new Dimension(120, 180));
 		
-		setBackground(Color.GRAY);
 	}
 
 }

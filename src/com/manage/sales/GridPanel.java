@@ -28,9 +28,9 @@ public class GridPanel extends JPanel{
 	Calendar endDate = Calendar.getInstance();
 	
 	public GridPanel() {
-		this.setVisible(false);
+		this.setVisible(true);
 		this.setBackground(Color.orange);
-		setPreferredSize(new Dimension(650, 550));
+		setPreferredSize(new Dimension(1000, 650));
 	}
 
 	public void setConnection(Connection con) {
@@ -123,10 +123,11 @@ public class GridPanel extends JPanel{
 				endDate.setTime(new Date());
 				//strDate 영화 개봉일 넣어줌
 				strDate.set(year, month, date);
+				//현재 일자에서 영화개봉일을 뺀 상영기간을 구해줌
 				period = (int)(endDate.getTimeInMillis() - strDate.getTimeInMillis())/(60*60*24*1000);
 				
 				String sales = String.format("%.1f", (double)sales_tot/period);
-				String booking = String.format("%.1f", (double)sales_qt/period);
+				String booking = String.format("%.1f", (double)sales_qt/period*100);
 				
 				MovieItem item = new MovieItem(poster, sales, booking);
 				add(item);
