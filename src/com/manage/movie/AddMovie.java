@@ -36,6 +36,7 @@ import javafx.stage.Stage;
 // 영화 추가 레이아웃
 public class AddMovie extends JInternalFrame{
 	JPanel p_outer;
+	
 	JFXPanel p_date;
 	
 	Canvas can;
@@ -87,7 +88,7 @@ public class AddMovie extends JInternalFrame{
 			
 			public void paint(Graphics g) {
 				// 포스터 붙이기
-				g.drawImage(img, 100, 100, this);
+				g.drawImage(img, 0, 0, 100, 100, this);
 			}
 		};
 		
