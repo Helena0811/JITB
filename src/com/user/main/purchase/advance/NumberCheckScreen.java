@@ -27,7 +27,7 @@ public class NumberCheckScreen extends ScreenFrame {
 	BirthPhonePanel bpn;
 	
 	Image img;
-	boolean flag = false;
+	boolean flag = true;
 	
 	public NumberCheckScreen(Main main) {
 		super(main);
@@ -36,10 +36,14 @@ public class NumberCheckScreen extends ScreenFrame {
 		p_north = new JPanel();
 		p_center = new JPanel();
 		
-		setImg("/white_line.png");
 		bt_bookingNum = new Canvas(){
 			@Override
 			public void paint(Graphics g) {
+				if(flag == true){
+					setImg("/white_line.png");
+				}else{
+					setImg("/black_line.png");
+				}
 				g.drawImage(img, 0, -20, 300, 100, this);
 				g.setColor(Color.WHITE);
 				g.setFont(new Font("Malgun Gothic", Font.BOLD, 25));
@@ -50,9 +54,10 @@ public class NumberCheckScreen extends ScreenFrame {
 		bt_birthPhone = new Canvas(){
 			@Override
 			public void paint(Graphics g) {
-				if(flag == false){
+				if(flag == true){
 					setImg("/black_line.png");
-					flag = true;
+				}else{
+					setImg("/white_line.png");
 				}
 				g.drawImage(img, 0, -20, 300, 100, this);
 				g.setColor(Color.WHITE);
@@ -69,10 +74,8 @@ public class NumberCheckScreen extends ScreenFrame {
 		bn.setPreferredSize(new Dimension(800, 1100));
 		bpn.setPreferredSize(new Dimension(800, 1100));
 		
-		p_north.setBackground(Color.BLACK);
-		p_center.setBackground(Color.BLACK);
-		bn.setBackground(Color.BLACK);
-		bpn.setBackground(Color.BLACK);
+		p_north.setBackground(new Color(33,33,33));
+		p_center.setBackground(new Color(33,33,33));
 		
 		p_north.add(bt_bookingNum);
 		p_north.add(bt_birthPhone);
@@ -106,12 +109,18 @@ public class NumberCheckScreen extends ScreenFrame {
 	}
 	
 	public void ClickBookingNum(){
-		setImg("/white_line.png");
+		flag = true;
 		bt_bookingNum.repaint();
+		bt_birthPhone.repaint();
+		bn.setVisible(true);
+		bpn.setVisible(false);
 	}
 	
 	public void ClickBirthPhone(){
-		setImg("/black_line.png");
+		flag = false;
 		bt_bookingNum.repaint();
+		bt_birthPhone.repaint();
+		bn.setVisible(false);
+		bpn.setVisible(true);
 	}
 }
