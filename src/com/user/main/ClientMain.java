@@ -3,6 +3,8 @@ package com.user.main;
 import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.net.Socket;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -27,6 +29,10 @@ public class ClientMain extends JFrame{
 	private DBManager manager;
 	private Connection con;
 	private ArrayList<JPanel> screen;
+	
+	int port = 7777; //사용자에게 노출되지 않고 바로 실행됨
+	String ip = "localhost"; //추후 네트워크상 다른 계정과도 테스트 해볼 것
+	Socket socket;
 	
 	/*
 	 * 생성자
@@ -96,6 +102,15 @@ public class ClientMain extends JFrame{
 			}else{
 				screen.get(i).setVisible(false);
 			}
+		}
+	}
+	
+	public void connect(){
+		try {
+			socket = new Socket(ip, port);
+			ClientThread ct;
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	

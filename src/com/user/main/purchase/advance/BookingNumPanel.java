@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu.Separator;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
