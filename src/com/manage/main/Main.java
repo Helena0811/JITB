@@ -10,13 +10,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.manage.inventory.InventoryMain;
 import com.manage.movie.Movie;
 import com.manage.sales.SalesMovie;
 
 public class Main extends JFrame implements ActionListener{
 	JPanel p_north, p_content;
-	//JButton bt_home, bt_movie, bt_inventory, bt_discount, bt_sales;
-	
+	//JButton bt_home, bt_movie, , bt_sales;
+	JButton bt_inventory, bt_discount;
 	// 메뉴에 따른 여러 버튼 배열로 저장
 	JButton[] menu=new JButton[5];
 	
@@ -68,10 +69,12 @@ public class Main extends JFrame implements ActionListener{
 		 * 4 : 매출 관리
 		 * */
 		page[1]=new Movie();
+		page[2]=new InventoryMain();
 		page[4]=new SalesMovie();
 		
 		// Movie Panel 부착
 		p_content.add(page[1]);
+		p_content.add(page[2]);
 		p_content.add(page[4]);
 		
 		// JTabbedPane을 사용하기 위해 GridLayout 1행1열 사용
@@ -90,6 +93,7 @@ public class Main extends JFrame implements ActionListener{
 	
 		//초기화면 세팅
 		page[1].setVisible(false);
+		page[2].setVisible(false);
 		page[4].setVisible(false);
 	}
 
@@ -113,13 +117,20 @@ public class Main extends JFrame implements ActionListener{
 			System.out.println("Movie 누름");
 			page[1].setVisible(true);
 			page[4].setVisible(false);
-		} else if(bt==menu[4]) {
+		}else if(bt==menu[2]){
+			System.out.println("재고 누름");
+			page[1].setVisible(false);
+			page[2].setVisible(true);
+			page[4].setVisible(false);
+		}
+		else if(bt==menu[4]) {
 			System.out.println("Sales 누름");			
 			page[4].setVisible(true);
 			page[1].setVisible(false);
 		}
 		else{
 			page[1].setVisible(false);
+			page[2].setVisible(false);
 			page[4].setVisible(false);
 		}
 	}
