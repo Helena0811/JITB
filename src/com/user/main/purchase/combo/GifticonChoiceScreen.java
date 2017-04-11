@@ -1,10 +1,10 @@
 package com.user.main.purchase.combo;
 
 import com.user.frame.ScreenFrame;
-import com.user.main.Main;
+import com.user.main.ClientMain;
 
 public class GifticonChoiceScreen extends ScreenFrame{
-	public GifticonChoiceScreen(Main main) {
+	public GifticonChoiceScreen(ClientMain main) {
 		super(main);
 	}
 }

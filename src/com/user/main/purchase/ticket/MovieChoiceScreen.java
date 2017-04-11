@@ -1,10 +1,10 @@
 package com.user.main.purchase.ticket;
 
 import com.user.frame.ScreenFrame;
-import com.user.main.Main;
+import com.user.main.ClientMain;
 
 public class MovieChoiceScreen extends ScreenFrame{
-	public MovieChoiceScreen(Main main) {
+	public MovieChoiceScreen(ClientMain main) {
 		super(main);
 	}
 }

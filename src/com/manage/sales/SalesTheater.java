@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-public class SalesTheater extends JPanel implements ItemListener{
+public class SalesTheater extends JFrame implements ItemListener{
 	
 	private JPanel p_north, p_center, p_content;
 	private JPanel p_daily, p_weekly, p_monthly;
@@ -48,6 +48,8 @@ public class SalesTheater extends JPanel implements ItemListener{
 		p_content.add(p_center, BorderLayout.CENTER);
 		p_content.setPreferredSize(new Dimension(1000, 700));		
 		add(p_content);
+		
+		choice.addItemListener(this);
 		
 		setLayout(new FlowLayout());
 		setVisible(true);
