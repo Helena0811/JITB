@@ -10,8 +10,8 @@ public class MovieData {
 	private String director;
 	private String story;
 	private String start_date;
-	private int run_time;
-	private int days;	
+	private String end_date;
+	private int run_time;	
 	
 	public MovieData getInstance() {
 		return instance;
@@ -77,20 +77,20 @@ public class MovieData {
 		this.start_date = start_date;
 	}
 
+	public String getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+
 	public int getRun_time() {
 		return run_time;
 	}
 
 	public void setRun_time(int run_time) {
 		this.run_time = run_time;
-	}
-
-	public int getDays() {
-		return days;
-	}
-
-	public void setDays(int days) {
-		this.days = days;
 	}
 	
 }
