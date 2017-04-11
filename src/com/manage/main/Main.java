@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 
 import com.manage.inventory.InventoryMain;
 import com.manage.movie.Movie;
-import com.manage.sales.Sales;
 import com.manage.sales.SalesMain;
 
 
@@ -70,12 +69,8 @@ public class Main extends JFrame implements ActionListener{
 		 * 4 : 매출 관리
 		 * */
 		page[1]=new Movie();
-<<<<<<< HEAD
-		page[4]=new SalesMain();
-=======
 		page[2]=new InventoryMain();
-		page[4]=new SalesMovie();
->>>>>>> 281fe9ec44a4421d8b3e6d3a5c9ff286a0eb354a
+		page[4]=new SalesMain();
 		
 		// Movie Panel 부착
 		p_content.add(page[1]);
@@ -121,6 +116,7 @@ public class Main extends JFrame implements ActionListener{
 		if(bt==menu[1]){
 			System.out.println("Movie 누름");
 			page[1].setVisible(true);
+			page[2].setVisible(false);
 			page[4].setVisible(false);
 		}else if(bt==menu[2]){
 			System.out.println("재고 누름");
@@ -130,8 +126,10 @@ public class Main extends JFrame implements ActionListener{
 		}
 		else if(bt==menu[4]) {
 			System.out.println("Sales 누름");			
-			page[4].setVisible(true);
 			page[1].setVisible(false);
+			page[2].setVisible(false);
+			page[4].setVisible(true);
+			
 		}
 		else{
 			page[1].setVisible(false);
