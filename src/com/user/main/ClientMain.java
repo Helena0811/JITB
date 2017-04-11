@@ -1,6 +1,5 @@
 package com.user.main;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -15,6 +14,7 @@ import com.user.main.purchase.ConfirmScreen;
 import com.user.main.purchase.DiscountChoiceScreen;
 import com.user.main.purchase.MenuChoiceScreen;
 import com.user.main.purchase.PaymentChoiceScreen;
+import com.user.main.purchase.advance.NoTicketScreen;
 import com.user.main.purchase.advance.NumberCheckScreen;
 import com.user.main.purchase.combo.ComboChoiceScreen;
 import com.user.main.purchase.combo.GifticonChoiceScreen;
@@ -23,7 +23,7 @@ import com.user.main.purchase.ticket.MovieChoiceScreen;
 import com.user.main.purchase.ticket.PersonsChoiceScreen;
 import com.user.main.purchase.ticket.SeatsChoiceScreen;
 
-public class Main extends JFrame{
+public class ClientMain extends JFrame{
 	private DBManager manager;
 	private Connection con;
 	private ArrayList<JPanel> screen;
@@ -32,7 +32,7 @@ public class Main extends JFrame{
 	 * 생성자
 	 * - 모든 화면 스크린 패널 생성
 	 */
-	public Main() {
+	public ClientMain() {
 		setLayout(new FlowLayout());
 		
 		init();
@@ -44,22 +44,15 @@ public class Main extends JFrame{
 		//index=2
 		screen.add(new NumberCheckScreen(this));
 		//index=3
+		screen.add(new NoTicketScreen(this));
 		screen.add(new MovieChoiceScreen(this));
-		//index=4
 		screen.add(new PersonsChoiceScreen(this));
-		//index=5
 		screen.add(new SeatsChoiceScreen(this));
-		//index=6
 		screen.add(new ComboChoiceScreen(this));
-		//index=7
 		screen.add(new GifticonChoiceScreen(this));
-		//index=8
 		screen.add(new OptionChoiceScreen(this));
-		//index=9
 		screen.add(new ConfirmScreen(this));
-		//index=10
 		screen.add(new DiscountChoiceScreen(this));
-		//index=11
 		screen.add(new PaymentChoiceScreen(this));
 		
 		for(int i=0; i<screen.size(); i++){
@@ -110,6 +103,6 @@ public class Main extends JFrame{
 	 * 실행부
 	 */
 	public static void main(String[] args){
-		new Main();
+		new ClientMain();
 	}
 }

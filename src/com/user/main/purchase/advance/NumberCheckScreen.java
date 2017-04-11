@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.user.frame.ScreenFrame;
-import com.user.main.Main;
+import com.user.main.ClientMain;
 
 public class NumberCheckScreen extends ScreenFrame {
 	JPanel p_north;
@@ -26,12 +26,15 @@ public class NumberCheckScreen extends ScreenFrame {
 	BookingNumPanel bn;
 	BirthPhonePanel bpn;
 	
+	Image btnImg[] = new Image[12];
+	
 	Image img;
 	boolean flag = true;
 	
-	public NumberCheckScreen(Main main) {
+	public NumberCheckScreen(ClientMain main) {
 		super(main);
 		setLayout(new BorderLayout());
+		setBtnImg();
 		
 		p_north = new JPanel();
 		p_center = new JPanel();
@@ -66,8 +69,8 @@ public class NumberCheckScreen extends ScreenFrame {
 			}
 		};
 		
-		bn = new BookingNumPanel();
-		bpn = new BirthPhonePanel();
+		bn = new BookingNumPanel(main, btnImg);
+		bpn = new BirthPhonePanel(main, btnImg);
 		
 		bt_bookingNum.setPreferredSize(new Dimension(300, 100));
 		bt_birthPhone.setPreferredSize(new Dimension(300, 100));
@@ -97,6 +100,30 @@ public class NumberCheckScreen extends ScreenFrame {
 				ClickBirthPhone();
 			}
 		});
+	}
+	
+	public void setBtnImg(){
+		URL url[] = new URL[12];
+		url[0] = getClass().getResource("/zero.png");
+		url[1] = getClass().getResource("/one.png");
+		url[2] = getClass().getResource("/two.png");
+		url[3] = getClass().getResource("/three.png");
+		url[4] = getClass().getResource("/four.png");
+		url[5] = getClass().getResource("/five.png");
+		url[6] = getClass().getResource("/six.png");
+		url[7] = getClass().getResource("/seven.png");
+		url[8] = getClass().getResource("/eight.png");
+		url[9] = getClass().getResource("/nine.png");
+		url[10] = getClass().getResource("/del.png");
+		url[11] = getClass().getResource("/check.png");
+		
+		try {
+			for(int i=0; i<btnImg.length; i++){
+				btnImg[i] = ImageIO.read(url[i]);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setImg(String src){

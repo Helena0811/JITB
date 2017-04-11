@@ -1,10 +1,10 @@
 package com.user.main.purchase;
 
 import com.user.frame.ScreenFrame;
-import com.user.main.Main;
+import com.user.main.ClientMain;
 
 public class ConfirmScreen extends ScreenFrame{
-	public ConfirmScreen(Main main) {
+	public ConfirmScreen(ClientMain main) {
 		super(main);
 	}
 }

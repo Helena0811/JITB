@@ -6,10 +6,10 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.user.main.Main;
+import com.user.main.ClientMain;
 
 public class ScreenFrame extends JPanel{
-	protected Main main;
+	protected ClientMain main;
 	private JLabel label;
 	
 	/*
@@ -18,7 +18,7 @@ public class ScreenFrame extends JPanel{
 	 * - 임시 배경색 지정
 	 * - 전체 스크린 크기 지정
 	 */
-	public ScreenFrame(Main main) {
+	public ScreenFrame(ClientMain main) {
 		this.main = main;
 		
 		label = new JLabel(this.getClass().getName());
