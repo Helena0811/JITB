@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class DBManager {
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	private String user = "batman";
-	private String password = "batman";
+	private String user = "jitb";
+	private String password = "jitb";
 	
 	private static DBManager instance;
 	private Connection con;

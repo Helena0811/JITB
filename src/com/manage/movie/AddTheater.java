@@ -126,7 +126,7 @@ public class AddTheater extends JInternalFrame implements ActionListener, ItemLi
 	
 	// 설정한 관 정보 저장
 	// -> theater 테이블에 데이터 저장
-	public void putData(){
+	public void insertTheater(){
 		
 		PreparedStatement pstmt=null;
 		
@@ -188,7 +188,7 @@ public class AddTheater extends JInternalFrame implements ActionListener, ItemLi
 			}
 			else{
 				// 확인 버튼을 누르면 데이터가 theater 테이블에 저장되고 창 종료
-				putData();
+				insertTheater();
 			}
 			
 			this.dispose();
