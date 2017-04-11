@@ -1,5 +1,5 @@
 /*
-영화별 평균 매출, 평균 예매를 확인할 수 있는 GridPanel
+현재 상영중인 영화별 평균 매출, 평균 예매를 확인할 수 있는 패널
  */
 package com.manage.sales;
 
@@ -19,17 +19,16 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class GridPanel extends JPanel{
+public class NowMovie extends JPanel{
 	private Connection con;
 	String path = "C:/project/JITB/res/";
 	ArrayList <BuyMovie> list = new ArrayList<BuyMovie>();
 	
-	//
 	Calendar strDate = Calendar.getInstance();
 	Calendar today = Calendar.getInstance();
 	Calendar endDate = Calendar.getInstance();
 	
-	public GridPanel() {
+	public NowMovie() {
 		this.setVisible(true);
 		this.setBackground(Color.orange);
 		setPreferredSize(new Dimension(1000, 650));
@@ -40,27 +39,19 @@ public class GridPanel extends JPanel{
 		loadData();
 	}
 
-
+	/*---------------------------------------
+	 Join을 통해 원하는 정보(Poster, StartDate, EndDATE를 불러온 후 
+	 현재 날짜를 불러오는 오라클 함수를 사용해
+	 현재 날짜와 영화의 EndDate 비교해서 상영 중인 데이터만을 출력
+	---------------------------------------*/
 	public void loadData() {
 		
-		//join을 통해 원하는 정보 불러오기
-		String sql = "select a.POSTER"
-				+ ", a.START_DATE"
-				+ ", a.END_DATE"
-				+", sum(d.sales_qt) as sales_qt"
-				+", sum(d.sales_tot) as sales_tot"
-				+" from movie a"
-				+", START_TIME b"
-				+", SEAT c"
-				+", BUY_MOVIE d"
-				+" where 1=1"
-				+" and a.MOVIE_ID = b.MOVIE_ID"
-				+" and b.START_TIME_ID = c.START_TIME_ID"
-				+" and c.SEAT_ID = d.SEAT_ID"
-				+" group by"
-				+" a.POSTER"
-				+", a.START_DATE"
-				+", a.END_DATE";
+		String sql = "select a.POSTER" + ", a.START_DATE" + ", a.END_DATE" + ", sum(d.sales_qt) as sales_qt"
+				+ ", sum(d.sales_tot) as sales_tot" + " from movie a" + ", START_TIME b" + ", SEAT c" + ", BUY_MOVIE d"
+				+ " where 1=1" + " and a.MOVIE_ID = b.MOVIE_ID" + " and b.START_TIME_ID = c.START_TIME_ID"
+				+ " and c.SEAT_ID = d.SEAT_ID" + " group by a.POSTER, a.START_DATE, a.END_DATE"
+				+ " having END_DATE > TO_DATE " + "(TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')"
+				+ ", 'YYYYMMDDHH24MISS') + (48 / 24)";
 				
 		PreparedStatement pstmt= null;
 		ResultSet rs = null;
@@ -80,7 +71,6 @@ public class GridPanel extends JPanel{
 
 				list.add(dto);
 			}
-			//데이터베이스를 모두 가져왔으므로 디자인에 반영
 			init();
 
 		} catch (SQLException e) {
@@ -104,7 +94,10 @@ public class GridPanel extends JPanel{
 		}
 	}
 	
-	//list에 담겨있는 만큼 for문 돌리기
+	/*---------------------------------------
+	 START_DATE, 현재 날짜(TODAY)를 불러옴
+	 상영 중인 영화의 경우 (START_DATE - TODAY)를 기간으로 설정
+	---------------------------------------*/
 	public void init() {
 		for(int i=0; i<list.size(); i++) {
 			BuyMovie buyMovie = list.get(i);
@@ -116,14 +109,14 @@ public class GridPanel extends JPanel{
 				int year = Integer.parseInt(str.substring(0, 4));
 				int month = Integer.parseInt(str.substring(5,7))-1;
 				int date = Integer.parseInt(str.substring(8,10))-1;
-				int period = 0; //영화 여러번 돌리기 때문에 startDate가 달라 초기화 시키기
 				
-				//endDate에 현재 일자 넣기
+				//영화 여러번 돌리기 때문에 startDate가 달라 초기화 시키기
+				int period = 0; 
+				
+				//today에 현재 일자 넣기
 				today.setTime(new Date());
 				//strDate 영화 개봉일 넣어줌
 				strDate.set(year, month, date);
-				//현재 일자에서 영화개봉일을 뺀 상영기간을 구해줌
-				endDate.set(year, month, date);
 				period = (int)(today.getTimeInMillis() - strDate.getTimeInMillis())/(60*60*24*1000);
 				
 				String sales = String.format("%.1f", (double)sales_tot/period);

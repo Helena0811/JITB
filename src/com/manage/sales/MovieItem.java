@@ -24,8 +24,8 @@ public class MovieItem extends JPanel{
 		};
 		
 		//판매율/방문자수??
-		la_sales = new JLabel("평균 매출 : "+ sales+"\n");
-		la_booking = new JLabel("평균 예매 : " +booking);
+		la_sales = new JLabel("평균 매출 : "+ sales+" 원 \n");
+		la_booking = new JLabel("평균 예매 : " +booking+" 건");
 	
 		add(can);
 		add(la_sales);

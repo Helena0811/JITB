@@ -2,7 +2,6 @@ package com.manage.main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.manage.movie.Movie;
-import com.manage.sales.SalesMovie;
+import com.manage.sales.Sales;
+import com.manage.sales.SalesMain;
+
 
 public class Main extends JFrame implements ActionListener{
 	JPanel p_north, p_content;
@@ -25,7 +26,7 @@ public class Main extends JFrame implements ActionListener{
 	
 	// 각 메뉴 패널(여기에 각자 만든 패널을 가져와주시면 됩니다!)
 	Movie movie;
-	SalesMovie salesMovie;
+	SalesMain salesMain;
 	
 	// 메뉴에 따른 여러 페이지 배열로 저장
 	JPanel[] page=new JPanel[5];
@@ -68,7 +69,7 @@ public class Main extends JFrame implements ActionListener{
 		 * 4 : 매출 관리
 		 * */
 		page[1]=new Movie();
-		page[4]=new SalesMovie();
+		page[4]=new SalesMain();
 		
 		// Movie Panel 부착
 		p_content.add(page[1]);
