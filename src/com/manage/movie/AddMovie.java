@@ -1,6 +1,5 @@
 package com.manage.movie;
 
-import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.time.LocalDate;
 
 import javax.imageio.ImageIO;
@@ -23,6 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.jitb.db.DBManager;
+
 import javafx.embed.swing.JFXPanel;
 import javafx.geometry.HPos;
 import javafx.scene.Group;
@@ -30,7 +32,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 // 영화 추가 레이아웃
@@ -68,6 +69,10 @@ public class AddMovie extends JInternalFrame{
 	private Stage stage;
     private DatePicker checkInDatePicker;
     private DatePicker checkOutDatePicker;
+    
+    // DB 연동
+    DBManager manager;
+    Connection con;
  
 	public AddMovie(String title, boolean resizable, boolean closable, boolean maximizable) {
 		this.title=title;
@@ -166,6 +171,20 @@ public class AddMovie extends JInternalFrame{
 		
 		setBounds(250, 50, 500, 600);
 		setVisible(true);
+		
+		// DB 연결
+		connect();
+	}
+	
+	// DB 연결
+	public void connect(){
+		
+	}
+	
+	// 설정한 영화 정보 저장
+	// -> movie 테이블에 데이터 저장
+	public void putData(){
+		
 	}
 	
 	// 이미지 파일을 가져오고, movie테이블의 poster에 저장
