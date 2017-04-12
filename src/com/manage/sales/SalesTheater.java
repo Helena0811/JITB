@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-public class SalesTheater extends JFrame implements ItemListener{
+public class SalesTheater extends JPanel implements ItemListener{
 	
 	private JPanel p_north, p_center, p_content;
 	private JPanel p_daily, p_weekly, p_monthly;

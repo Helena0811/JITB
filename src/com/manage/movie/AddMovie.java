@@ -1,6 +1,7 @@
 package com.manage.movie;
 
 import java.awt.Canvas;
+import java.awt.Choice;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -10,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -20,8 +23,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -45,7 +50,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 // 영화 추가 레이아웃
-public class AddMovie extends JInternalFrame implements ActionListener, FocusListener{
+public class AddMovie extends JInternalFrame implements ActionListener, FocusListener, ItemListener{
 	JPanel p_outer;
 	
 	JFXPanel p_date;
@@ -67,7 +72,9 @@ public class AddMovie extends JInternalFrame implements ActionListener, FocusLis
 	JLabel lb_run_time;
 	JTextField t_run_time;
 	
-	JButton bt_confirm;
+	Choice ch_theater;
+	
+	JButton bt_confirm, bt_cancel;
 	
 	Toolkit kit=Toolkit.getDefaultToolkit();
 	Image img;
@@ -97,6 +104,8 @@ public class AddMovie extends JInternalFrame implements ActionListener, FocusLis
     };
     
     JTextField[] t_input=new JTextField[5];
+    
+    ArrayList<TheaterData> theater=new ArrayList<TheaterData>();
  
 	public AddMovie(String title, boolean resizable, boolean closable, boolean maximizable) {
 		this.title=title;
@@ -121,7 +130,7 @@ public class AddMovie extends JInternalFrame implements ActionListener, FocusLis
 			}
 		};
 		
-		can.setPreferredSize(new Dimension(200, 300));
+		can.setPreferredSize(new Dimension(500, 300));
 		can.setBounds(0, 0, 200, 300);
 		
 		chooser=new JFileChooser("C:/Users/user/Pictures/AC3");
@@ -141,10 +150,13 @@ public class AddMovie extends JInternalFrame implements ActionListener, FocusLis
 		t_actor=new JTextField(txtDefault[2],20);
 		ta_story=new JTextArea(txtDefault[3],4,20);
 		t_run_time=new JTextField(txtDefault[4],20);
+		ch_theater=new Choice();
 		
 		bt_confirm=new JButton("확인");
+		bt_cancel=new JButton("취소");
 		
 		bt_confirm.addActionListener(this);
+		bt_cancel.addActionListener(this);
 		
 		t_title.addFocusListener(this);
 		t_director.addFocusListener(this);
@@ -162,7 +174,9 @@ public class AddMovie extends JInternalFrame implements ActionListener, FocusLis
 		p_outer.add(ta_story);
 		p_outer.add(p_date);
 		p_outer.add(t_run_time);
+		p_outer.add(ch_theater);
 		p_outer.add(bt_confirm);
+		p_outer.add(bt_cancel);
 		add(p_outer);
 		
 		setBounds(250, 50, 500, 600);
@@ -170,6 +184,10 @@ public class AddMovie extends JInternalFrame implements ActionListener, FocusLis
 		
 		// DB 연결
 		connect();
+		
+		// 사용 가능한 영화관 목록 가져오기
+		getTheaterList();
+		System.out.println(theater);
 	}
 	
 	// DB 연결
@@ -202,6 +220,9 @@ public class AddMovie extends JInternalFrame implements ActionListener, FocusLis
 		sql.append(" values(seq_movie.nextval, ?, ?, ?, ?, ?, ");
 		sql.append("to_date(?,'YYYY-MM-DD'), ");
 		sql.append("to_date(?,'YYYY-MM-DD'), ?)");
+		
+		StringBuffer sql2=new StringBuffer();
+		sql2.append("update ");
 		
 		// 제약조건(제약조건이 좀 많아유ㅠㅠ)
 		/* 1. 이미지명이 제대로 들어오고
@@ -304,7 +325,19 @@ public class AddMovie extends JInternalFrame implements ActionListener, FocusLis
 				}
 			}
 		}
-		
+
+	}
+	
+	// 하나의 frame을 가지고 사용하므로 기존 값으로 항상 초기화
+	public void setDefault(){
+		t_title.setText(txtDefault[0]);
+		t_director.setText(txtDefault[1]);
+		t_actor.setText(txtDefault[2]);
+		ta_story.setText(txtDefault[3]);
+		t_run_time.setText(txtDefault[4]);
+		//ch_theater.select(0);
+		startDatePicker.setValue(LocalDate.now());
+		endDatePicker.setValue(startDatePicker.getValue().plusDays(1));
 		
 	}
 	
@@ -337,8 +370,13 @@ public class AddMovie extends JInternalFrame implements ActionListener, FocusLis
 		
 		if(bt==bt_confirm){
 			insertMovie();
-			this.dispose();
-		}	
+			this.setVisible(false);
+			//this.dispose();
+		}
+		else if(bt==bt_cancel){
+			//this.dispose();
+			this.setVisible(false);
+		}
 	}
 	
 	// textfield default값 구하기
@@ -388,6 +426,59 @@ public class AddMovie extends JInternalFrame implements ActionListener, FocusLis
 				}
 			}
 		}
+	}
+	
+	// 영화관 choice 목록 가져오기
+	public void getTheaterList(){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from theater where movie_id is null";
+		
+		try {
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()){
+				TheaterData theaterData=new TheaterData();
+				theaterData.setTheater_id(rs.getInt("theater_id"));
+				theaterData.setName(rs.getString("name"));
+				theaterData.setRow_line(rs.getInt("row_line"));
+				theaterData.setColumn_line(rs.getInt("column_line"));
+				theaterData.setBranch_id(rs.getInt("branch_id"));
+				theaterData.setMovie_id(rs.getString("movie_id"));
+				
+				theater.add(theaterData);
+			}
+			
+			// 레코드 수만큼 영화관 목록 받아오기
+			for(int i=0; i<theater.size(); i++){
+				System.out.println(theater.get(i).getName());
+				ch_theater.add(theater.get(i).getName()+"관");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 영화관에 movie_id 넘기기
+	public void insertMovieID(){
+		PreparedStatement pstmt;
+		
+	}
+	
+	// 관 선택 choice 구현
+	public void itemStateChanged(ItemEvent e) {
+		Object obj=e.getItem();
+		Choice ch=(Choice)obj;
+		
+		int index=ch.getSelectedIndex();
+		
+		// 영화관을 선택하면
+		if(index==ch_theater.getSelectedIndex()){
+			insertMovieID();
+		}
+		
 	}
 	
 }

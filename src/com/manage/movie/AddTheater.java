@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -98,6 +99,7 @@ public class AddTheater extends JInternalFrame implements ActionListener, ItemLi
 		p_select.add(ch_col);
 		
 		p_button.add(bt_confirm);
+		p_button.add(bt_cancel);
 		
 		p_outer.add(p_title);
 		p_outer.add(p_input);
@@ -108,6 +110,7 @@ public class AddTheater extends JInternalFrame implements ActionListener, ItemLi
 		add(p_outer);
 		
 		bt_confirm.addActionListener(this);
+		bt_cancel.addActionListener(this);
 		
 		setBounds(370, 220, 300, 200);
 		//setSize(300, 200);
@@ -162,6 +165,13 @@ public class AddTheater extends JInternalFrame implements ActionListener, ItemLi
 		}
 	}
 	
+	// 하나의 frame을 가지고 사용하므로 기존 값으로 항상 초기화
+	public void setDefault(){
+		t_name.setText("");
+		ch_row.select(0);
+		ch_col.select(0);
+	}
+	
 	// choice 선택(지금 사용 안함)
 	public void itemStateChanged(ItemEvent e) {
 		Object obj=e.getSource();
@@ -189,14 +199,15 @@ public class AddTheater extends JInternalFrame implements ActionListener, ItemLi
 			else{
 				// 확인 버튼을 누르면 데이터가 theater 테이블에 저장되고 창 종료
 				insertTheater();
+				//this.dispose();
+				this.setVisible(false);
 			}
-			
-			this.dispose();
 		}
 		
 		// 취소 버튼을 누르면
 		else if(bt==bt_cancel){
-			this.dispose();
+			//this.dispose();
+			this.setVisible(false);
 		}
 	}
 

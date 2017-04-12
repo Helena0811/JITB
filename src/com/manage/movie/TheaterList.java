@@ -31,8 +31,13 @@ public class TheaterList extends JPanel implements ActionListener{
 	
 	AddTheater addTheater;
 	
+	JDesktopPane desktop=new JDesktopPane();
+	
 	DBManager manager;
 	Connection con;
+	
+	// innerFrame이 켜져있는 상태면 추가 버튼 비활성화
+	boolean inner=false;
 	
 	// 현재 존재하는 영화관을 담아놓을 collection framework
 	ArrayList<JPanel> theaterList=new ArrayList<JPanel>();
@@ -47,10 +52,17 @@ public class TheaterList extends JPanel implements ActionListener{
 		p_north.add(lb_title, BorderLayout.WEST);
 		p_north.add(bt_add, BorderLayout.EAST);
 		
-		p_content.setBackground(Color.CYAN);
+		//p_content.setBackground(Color.CYAN);
 		p_content.setLayout(new BorderLayout());
 		
 		bt_add.addActionListener(this);
+		
+		if(inner){
+			bt_add.setEnabled(false);
+		}
+		else{
+			bt_add.setEnabled(true);
+		}
 		
 		setLayout(new BorderLayout());
 		add(p_north,BorderLayout.NORTH);
@@ -100,26 +112,34 @@ public class TheaterList extends JPanel implements ActionListener{
 	}
 	
 	public void makeInnerFrame(){
-		JDesktopPane desktop=new JDesktopPane();
+		//JDesktopPane desktop=new JDesktopPane();
 		
 		Dimension outerSize=this.getSize();
 		
-		addTheater=new AddTheater("영화관 추가", true, true, true);
+		addTheater=new AddTheater("영화관 추가", true, false, true);
 		//addTheater.setBounds(outerSize.width/2, outerSize.height/2, 300, 200);
 		
 		desktop.add(addTheater);
 		
 		this.p_content.add(desktop);
-
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		Object obj=e.getSource();
 		JButton bt=(JButton)obj;
 		
-		// 영화관 추가 버튼
-		if(bt==bt_add){
-			makeInnerFrame();
+		// innerFrame이 생성된 적이 없으면
+		if(!inner){
+			// 영화관 추가 버튼
+			if(bt==bt_add){
+				makeInnerFrame();
+				System.out.println("추가 누름");
+				inner=true;
+			}
+		}
+		else{
+			addTheater.setDefault();
+			addTheater.setVisible(true);
 		}
 	}
 }
