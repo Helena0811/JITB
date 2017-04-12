@@ -5,8 +5,8 @@
 		<server>localhost</server>
 		<port>1521</port>
 		<database>XE</database>
-		<user>batman</user>
-		<password>1234</password>
+		<user>jitb</user>
+		<password>jitb</password>
 		<use_default_driver>true</use_default_driver>
 		<url>jdbc:oracle:thin:@localhost:1521:XE</url>
 		<driver_class_name>oracle.jdbc.driver.OracleDriver</driver_class_name>
@@ -23,7 +23,7 @@
 	<category_index>0</category_index>
 	<zoom>0.8</zoom>
 	<x>0</x>
-	<y>590</y>
+	<y>0</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -146,7 +146,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2017-04-08 15:58:59</creation_date>
-			<updated_date>2017-04-12 08:36:12</updated_date>
+			<updated_date>2017-04-12 15:14:42</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -2350,7 +2350,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>25</word_id>
+					<word_id>27</word_id>
 					<id>29</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2383,7 +2383,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>35</word_id>
+					<word_id>34</word_id>
 					<id>30</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2416,7 +2416,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>16</word_id>
+					<word_id>17</word_id>
 					<id>31</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2546,7 +2546,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>27</word_id>
+					<word_id>25</word_id>
 					<id>34</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2579,7 +2579,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>17</word_id>
+					<word_id>16</word_id>
 					<id>35</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2612,7 +2612,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>34</word_id>
+					<word_id>35</word_id>
 					<id>36</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2709,7 +2709,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>22</word_id>
+					<word_id>23</word_id>
 					<id>38</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2992,7 +2992,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>23</word_id>
+					<word_id>22</word_id>
 					<id>44</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3706,7 +3706,7 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>buy_snak</physical_name>
+			<physical_name>buy_snack</physical_name>
 			<logical_name>영화 구매</logical_name>
 			<description></description>
 			<constraint></constraint>
