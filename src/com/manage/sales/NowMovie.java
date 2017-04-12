@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 
 public class NowMovie extends JPanel{
 	private Connection con;
-	String path = "C:/project/JITB/res/";
+	String path = "C:/project/JITB/res_manager/";
 	ArrayList <BuyMovie> list = new ArrayList<BuyMovie>();
 	
 	Calendar strDate = Calendar.getInstance();
